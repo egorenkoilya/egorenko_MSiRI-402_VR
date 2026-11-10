@@ -698,6 +698,8 @@ MonoBehaviour:
   nodeX: {fileID: 117116905}
   nodeY: {fileID: 582579437}
   nodeZ: {fileID: 447312129}
+  rotatingChuck: {fileID: 6840279178373657051}
+  chuckRotationSpeed: 60
 --- !u!4 &218862134
 Transform:
   m_ObjectHideFlags: 0
@@ -1532,8 +1534,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8111044653813595304}
+  m_Children: []
   m_Father: {fileID: 543450652554240179}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &472348172
@@ -5404,6 +5405,7 @@ Transform:
   - {fileID: 8704730607979333555}
   - {fileID: 5641873287082954601}
   - {fileID: 8917251116560468319}
+  - {fileID: 8111044653813595304}
   - {fileID: 5125123416179164405}
   - {fileID: 5089450402743301934}
   - {fileID: 5492483936175341477}
@@ -15575,7 +15577,7 @@ Transform:
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 447312129}
+  m_Father: {fileID: 543450652554240179}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8155418218815894403
 GameObject:

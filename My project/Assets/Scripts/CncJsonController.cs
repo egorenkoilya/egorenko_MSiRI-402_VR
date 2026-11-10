@@ -8,13 +8,19 @@ using UnityEngine.Networking;
 
 public class CncJsonController : MonoBehaviour
 {
+    [Header("Подключение к ЧПУ")]
     public string url = "https://cnc.kovalev.team/get/3";
     public int channel = 1;
     public float interval = 0.5f;
 
+    [Header("Управляющие узлы")]
     public Transform nodeX;
     public Transform nodeY;
     public Transform nodeZ;
+
+    [Header("Вращение патрона")]
+    public Transform rotatingChuck;
+    public float chuckRotationSpeed = 60f;
 
     private Vector3 startX;
     private Vector3 startY;
@@ -25,6 +31,12 @@ public class CncJsonController : MonoBehaviour
         if (nodeX == null || nodeY == null || nodeZ == null)
         {
             Debug.LogError("Назначьте три узла станка в Inspector.");
+            yield break;
+        }
+
+        if (rotatingChuck == null)
+        {
+            Debug.LogError("Назначьте корпус патрона в Inspector.");
             yield break;
         }
 
@@ -63,6 +75,18 @@ public class CncJsonController : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (rotatingChuck != null)
+        {
+            rotatingChuck.Rotate(
+                Vector3.forward,
+                chuckRotationSpeed * Time.deltaTime,
+                Space.Self
+            );
+        }
+    }
+
     private float GetCoordinate(JObject data, string axis)
     {
         foreach (JToken section in data["data"])
@@ -98,7 +122,7 @@ public class CncJsonController : MonoBehaviour
     {
         JObject data = JObject.Parse(json);
 
-        // Увеличенный масштаб движения — 3 раза
+        // Увеличенный масштаб перемещения
         float x = GetCoordinate(data, "X") * 0.003f;
         float y = GetCoordinate(data, "Y") * 0.003f;
         float z = GetCoordinate(data, "Z") * 0.003f;
